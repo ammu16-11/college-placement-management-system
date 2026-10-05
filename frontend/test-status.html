@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Application Status</title>
+</head>
+<body>
+
+<h2>Application Status Test</h2>
+
+<button onclick="updateStatus()">Reject Application #1</button>
+
+<script>
+async function updateStatus() {
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:5000/applications/1",
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    status: "REJECTED"
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        alert(JSON.stringify(data));
+
+    } catch (error) {
+        alert(error);
+    }
+}
+</script>
+
+</body>
+</html>

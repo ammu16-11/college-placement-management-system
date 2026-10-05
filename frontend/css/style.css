@@ -1,0 +1,1152 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+header {
+    padding: 30px;
+}
+
+main {
+    margin-top: 50px;
+}
+
+.roles {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card button {
+    margin-top: 10px;
+}
+
+body {
+    background: linear-gradient(135deg, #e0f2fe, #ede9fe);
+}
+
+header {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+}
+
+.dashboard .card:nth-child(1) {
+    border-top: 5px solid #3b82f6;
+}
+
+.dashboard .card:nth-child(2) {
+    border-top: 5px solid #10b981;
+}
+
+.dashboard .card:nth-child(3) {
+    border-top: 5px solid #f59e0b;
+}
+
+.dashboard .card:nth-child(4) {
+    border-top: 5px solid #ec4899;
+}
+
+.dashboard .card:nth-child(5) {
+    border-top: 5px solid #8b5cf6;
+}
+
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card button {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background: #3730a3;
+}
+.profile-box {
+    margin-top: 25px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    border-left: 6px solid #3b82f6;
+}
+
+.profile-box h2 {
+    color: #4f46e5;
+    margin-top: 0;
+}
+
+.profile-box p {
+    font-size: 16px;
+    margin: 12px 0;
+}
+.job-box {
+    margin-top: 25px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    border-left: 6px solid #10b981;
+}
+
+.job-box h2 {
+    color: #059669;
+    margin-top: 0;
+}
+
+.job-card {
+    padding: 18px;
+    margin-top: 15px;
+    border-radius: 10px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.job-card h3 {
+    color: #047857;
+    margin-top: 0;
+}
+
+.job-card p {
+    margin: 8px 0;
+}
+.application-box {
+    margin-top: 25px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    border-left: 6px solid #f59e0b;
+}
+
+.application-box h2 {
+    color: #d97706;
+    margin-top: 0;
+}
+
+.application-box pre {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+.interview-box {
+    margin-top: 25px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    border-left: 6px solid #ec4899;
+}
+
+.interview-box h2 {
+    color: #db2777;
+    margin-top: 0;
+}
+
+.interview-box pre {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+.placement-box {
+    margin-top: 25px;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    border-left: 6px solid #8b5cf6;
+}
+
+.placement-box h2 {
+    color: #7c3aed;
+    margin-top: 0;
+}
+
+.placement-box pre {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+.application-card {
+    margin-top: 15px;
+    padding: 20px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.application-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.application-card h3 {
+    margin-top: 0;
+    color: #b45309;
+}
+
+.application-card p {
+    margin: 8px 0;
+}
+
+.application-card .status {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #10b981;
+    color: white;
+    font-weight: bold;
+}
+.interview-card {
+    margin-top: 15px;
+    padding: 20px;
+    background: #fdf2f8;
+    border: 1px solid #f9a8d4;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.interview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.interview-card h3 {
+    margin-top: 0;
+    color: #be185d;
+}
+
+.interview-card p {
+    margin: 8px 0;
+}
+
+.interview-card .interview-result {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: #10b981;
+    color: white;
+    font-weight: bold;
+}
+
+.placement-card {
+    margin-top: 15px;
+    padding: 20px;
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.placement-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.placement-card h3 {
+    margin-top: 0;
+    color: #6d28d9;
+}
+
+.placement-card p {
+    margin: 8px 0;
+}
+
+.company-profile-box {
+margin-top: 25px;
+padding: 25px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+border-left: 6px solid #3b82f6;
+}
+
+.company-profile-box h2 {
+color: #2563eb;
+margin-top: 0;
+}
+
+.company-profile-box p {
+font-size: 16px;
+margin: 12px 0;
+}
+
+.company-form-box {
+margin-top: 25px;
+padding: 25px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+border-left: 6px solid #10b981;
+}
+
+.company-form-box h2 {
+color: #059669;
+margin-top: 0;
+}
+
+.company-form-box form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.company-form-box input {
+padding: 12px;
+border: 1px solid #d1d5db;
+border-radius: 6px;
+font-size: 15px;
+}
+
+.company-form-box button {
+width: fit-content;
+background: #059669;
+color: white;
+border: none;
+padding: 11px 20px;
+border-radius: 6px;
+cursor: pointer;
+}
+
+.company-form-box button:hover {
+background: #047857;
+}
+
+.company-jobs-box {
+margin-top: 25px;
+padding: 25px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+border-left: 6px solid #10b981;
+}
+
+.company-jobs-box h2 {
+color: #059669;
+margin-top: 0;
+}
+
+.company-job-card {
+margin-top: 15px;
+padding: 20px;
+background: #f0fdf4;
+border: 1px solid #bbf7d0;
+border-radius: 10px;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.company-job-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.company-job-card h3 {
+margin-top: 0;
+color: #047857;
+}
+
+.company-job-card p {
+margin: 8px 0;
+}
+
+.company-applications-box {
+margin-top: 25px;
+padding: 25px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+border-left: 6px solid #f59e0b;
+}
+
+.company-applications-box h2 {
+color: #d97706;
+margin-top: 0;
+}
+
+.company-application-card {
+margin-top: 15px;
+padding: 20px;
+background: #fffbeb;
+border: 1px solid #fde68a;
+border-radius: 10px;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.company-application-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.company-application-card h3 {
+margin-top: 0;
+color: #b45309;
+}
+
+.company-application-card p {
+margin: 8px 0;
+}
+
+.company-status {
+display: inline-block;
+padding: 5px 12px;
+border-radius: 20px;
+background: #10b981;
+color: white;
+font-weight: bold;
+}
+
+.company-interviews-box {
+margin-top: 25px;
+padding: 25px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+border-left: 6px solid #ec4899;
+}
+
+.company-interviews-box h2 {
+color: #db2777;
+margin-top: 0;
+}
+
+.company-interview-card {
+margin-top: 15px;
+padding: 20px;
+background: #fdf2f8;
+border: 1px solid #f9a8d4;
+border-radius: 10px;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.company-interview-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.company-interview-card h3 {
+margin-top: 0;
+color: #be185d;
+}
+
+.company-interview-card p {
+margin: 8px 0;
+}
+
+.company-interview-result {
+display: inline-block;
+padding: 5px 12px;
+border-radius: 20px;
+background: #10b981;
+color: white;
+font-weight: bold;
+}
+.job-card button {
+    margin-top: 12px;
+    background: #059669;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.job-card button:hover {
+    background: #047857;
+}
+.application-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.application-actions button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.application-actions button:first-child {
+    background: #059669;
+    color: white;
+}
+
+.application-actions button:last-child {
+    background: #dc2626;
+    color: white;
+}
+
+.application-actions button:hover {
+    opacity: 0.85;
+}
+
+
+
+.admin-box {
+    margin-top: 30px;
+    padding: 25px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.admin-box h2 {
+    margin-bottom: 20px;
+}
+
+.admin-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.admin-card h3 {
+    margin-bottom: 12px;
+}
+
+.admin-card p {
+    margin: 6px 0;
+}
+
+.admin-card strong {
+    font-weight: 600;
+}
+
+.admin-box button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.admin-box button:hover {
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   PROFESSIONAL PLACEMENT DASHBOARD STYLING
+   Styling only - no functionality changes
+   ========================================================= */
+
+/* Dashboard page background */
+
+body {
+    background: #f4f7fb;
+}
+
+
+/* Header */
+
+header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    color: white;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.15);
+}
+
+header h1 {
+    margin-bottom: 8px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+header p {
+    color: #dbeafe;
+    font-size: 15px;
+}
+
+
+/* Main dashboard area */
+
+main {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 25px;
+}
+
+main h2 {
+    color: #0f172a;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+main > p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+
+/* Dashboard cards */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 25px;
+    min-height: 160px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    transition: all 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    border-color: #93c5fd;
+}
+
+.card h3 {
+    color: #1e3a8a;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* Dashboard buttons */
+
+.card button,
+.admin-box button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.card button:hover,
+.admin-box button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/* Admin / Placement Officer sections */
+
+.admin-box {
+    margin-top: 30px;
+    padding: 28px;
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #dbe4f0;
+    box-shadow: 0 5px 18px rgba(15, 23, 42, 0.07);
+}
+
+.admin-box h2 {
+    color: #0f172a;
+    font-size: 24px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+
+/* Admin cards */
+
+.admin-card {
+    background: #f8fafc;
+    padding: 22px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+    transition: all 0.2s ease;
+}
+
+.admin-card:hover {
+    background: #ffffff;
+    border-color: #93c5fd;
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.09);
+    transform: translateY(-2px);
+}
+
+.admin-card h3 {
+    color: #1e40af;
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+
+.admin-card p {
+    color: #475569;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.admin-card strong {
+    color: #0f172a;
+}
+
+
+/* Student / Company information cards */
+
+.profile-card,
+.job-card,
+.application-card,
+.interview-card,
+.placement-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    transition: all 0.2s ease;
+}
+
+.profile-card:hover,
+.job-card:hover,
+.application-card:hover,
+.interview-card:hover,
+.placement-card:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+}
+
+
+/* Job titles */
+
+.job-card h3 {
+    color: #1e3a8a;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+
+/* Status styling */
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+
+/* Applied */
+
+.status-applied {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+
+/* Shortlisted */
+
+.status-shortlisted {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+/* Rejected */
+
+.status-rejected {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* Passed */
+
+.status-passed {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+/* Pending */
+
+.status-pending {
+    background: #fef3c7;
+    color: #a16207;
+}
+
+
+/* Buttons inside cards */
+
+.profile-card button,
+.job-card button,
+.application-card button,
+.interview-card button,
+.placement-card button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.profile-card button:hover,
+.job-card button:hover,
+.application-card button:hover,
+.interview-card button:hover,
+.placement-card button:hover {
+    background: #1d4ed8;
+}
+
+
+/* Company application action buttons */
+
+.application-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+}
+
+.application-actions button:first-child {
+    background: #059669;
+    color: white;
+}
+
+.application-actions button:first-child:hover {
+    background: #047857;
+}
+
+.application-actions button:last-child {
+    background: #dc2626;
+    color: white;
+}
+
+.application-actions button:last-child:hover {
+    background: #b91c1c;
+}
+
+
+/* Placement Officer emphasis */
+
+.admin-box::before {
+    content: "";
+    display: block;
+    height: 4px;
+    width: 55px;
+    background: #2563eb;
+    border-radius: 5px;
+    margin-bottom: 18px;
+}
+
+
+/* Smooth page appearance */
+
+.card,
+.admin-card,
+.profile-card,
+.job-card,
+.application-card,
+.interview-card,
+.placement-card {
+    animation: dashboardFade 0.35s ease;
+}
+
+@keyframes dashboardFade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Responsive dashboard */
+
+@media (max-width: 900px) {
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        padding: 0 15px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .admin-box {
+        padding: 18px;
+    }
+
+}
+
+/* =========================================================
+   ROLE SELECTION BUTTONS - HOME PAGE
+   ========================================================= */
+
+.roles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.roles button {
+    width: 220px;
+    min-height: 65px;
+    padding: 16px 22px;
+
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.roles button:hover {
+    background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.28);
+}
+
+.roles button:active {
+    transform: translateY(0);
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .roles {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .roles button {
+        width: 90%;
+        max-width: 320px;
+    }
+}
+
+/* =========================================================
+   STUDENT LOGIN - PROFESSIONAL STYLING
+   ========================================================= */
+
+#loginForm {
+    width: 100%;
+    max-width: 430px;
+    margin: 30px auto;
+    padding: 32px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.10);
+}
+
+
+/* Login inputs */
+
+#loginForm input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+    margin-bottom: 18px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #f8fafc;
+    color: #0f172a;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+#loginForm input:focus {
+    background: #ffffff;
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* Login button */
+
+#loginForm button {
+    display: block;
+    width: 100%;
+
+    padding: 14px 20px;
+
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: #ffffff;
+
+    border: none;
+    border-radius: 9px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 12px rgba(37, 99, 235, 0.20);
+
+    transition: all 0.2s ease;
+}
+
+#loginForm button:hover {
+    background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.28);
+}
+
+#loginForm button:active {
+    transform: translateY(0);
+}
+
+
+/* Login heading */
+
+main h2 {
+    color: #0f172a;
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+
+/* Login message */
+
+#message {
+    max-width: 430px;
+    margin: 15px auto;
+    text-align: center;
+
+    color: #475569;
+    font-size: 14px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    #loginForm {
+        width: calc(100% - 30px);
+        padding: 24px;
+    }
+
+}
+
+.home-page,
+.dashboard-page {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.home-page {
+    background-image: url("../images/home.jpg");
+}
+
+.dashboard-page {
+    background-image: url("../images/dashboard.jpg");
+}
+
+.company-dashboard-subtitle {
+    color: #f8fafc;
+    font-weight: 500;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}

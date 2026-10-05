@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Placement Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="home-page">
+
+    <header>
+        <h1>College Placement Management System</h1>
+        <p style="color: rgb(245, 242, 242); font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.6);">Cloud-Based Placement and Recruitment Platform</p>
+    </header>
+
+    <main>
+         
+        <h2>Welcome</h2>
+        <p>Select your role to continue</p>
+
+        <div class="roles">
+            <button onclick="selectRole('student')">Student</button>
+
+            <button onclick="selectRole('company')">
+                Company / Recruiter
+            </button>
+
+            <button onclick="selectRole('admin')">
+                Placement Officer
+            </button>
+        </div>
+
+        <div id="message"></div>
+        
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-page">
+
+    <header>
+        <h1>Student Dashboard</h1>
+        <p>College Placement Management System</p>
+    </header>
+
+    <main>
+        <h2>Welcome, Test Student</h2>
+        <p style="color: white; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.6);">Manage your placement activities from your dashboard.</p>
+        <div id="dashboardContent"></div>
+        
+        <div class="dashboard">
+
+            <div class="card">
+                <h3>My Profile</h3>
+                <p>View and manage your student profile.</p>
+                <button onclick="viewProfile()">View Profile</button>
+            </div>
+
+            <div class="card">
+                <h3>Available Jobs</h3>
+                <p>View jobs and placement opportunities.</p>
+                <button onclick="viewJobs()">View Jobs</button>
+            </div>
+
+            <div class="card">
+                <h3>My Applications</h3>
+                <p>Track your job applications.</p>
+                <button onclick="viewApplications()">View Applications</button>
+            </div>
+
+            <div class="card">
+                <h3>My Interviews</h3>
+                <p>View upcoming and completed interviews.</p>
+                <button onclick="viewInterviews()">View Interviews</button>
+            </div>
+
+            <div class="card">
+                <h3>Placement Status</h3>
+                <p>View your final placement details.</p>
+                <button onclick="viewPlacement()">View Placement</button>
+            </div>
+
+        </div>
+    </main>
+<script src="js/student-dashboard.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-page">
+
+    <header>
+        <h1>Company Dashboard</h1>
+        <p>College Placement Management System</p>
+    </header>
+
+    <main>
+
+        <h2>Welcome, ABC Technologies Pvt Ltd</h2>
+        <p style="color: white; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.6);">
+    Manage your recruitment activities from your dashboard.
+        </p>
+
+        <div id="companyContent"></div>
+
+        <div class="dashboard">
+
+            <div class="card">
+                <h3>Company Profile</h3>
+                <p>View and manage company details.</p>
+                <button onclick="viewCompanyProfile()">View Profile</button>
+            </div>
+
+            <div class="card">
+                <h3>Post Jobs</h3>
+                <p>Create and manage job opportunities.</p>
+                <button onclick="postJob()">Post Job</button>
+            </div>
+
+            <div class="card">
+                <h3>View Jobs</h3>
+                <p>View jobs posted by your company.</p>
+                <button onclick="viewCompanyJobs()">View Jobs</button>
+            </div>
+
+            <div class="card">
+                <h3>Applications</h3>
+                <p>View applications from students.</p>
+                <button onclick="viewCompanyApplications()">View Applications</button>
+            </div>
+
+            <div class="card">
+                <h3>Interviews</h3>
+                <p>Manage student interviews.</p>
+                <button onclick="viewCompanyInterviews()">View Interviews</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/company-dashboard.js"></script>
+
+</body>
+</html>
