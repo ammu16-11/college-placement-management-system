@@ -197,3 +197,6 @@ async function viewPlacement() {
     }
 }
 
+function logout() {
+    window.location.href = "index.html";
+}
