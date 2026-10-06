@@ -3,6 +3,10 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - echo Installing security scanning tool...
+      - pip3 install pip-audit
+      - echo Running dependency vulnerability scan...
+      - pip-audit -r backend/requirements.txt
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 179923445087.dkr.ecr.ap-southeast-2.amazonaws.com
 
@@ -15,6 +19,7 @@ phases:
 
   post_build:
     commands:
+      - echo Security scan completed successfully.
       - echo Pushing Docker image to Amazon ECR...
       - docker push 179923445087.dkr.ecr.ap-southeast-2.amazonaws.com/college-placement-backend:latest
       - echo Docker image pushed successfully.
