@@ -1,6 +1,6 @@
 async function viewCompanyProfile() {
 try {
-const response = await fetch("http://127.0.0.1:5000/companies");
+const response = await fetch("http://3.106.120.107:5000/companies");
 const companies = await response.json();
 
 
@@ -60,7 +60,7 @@ document.getElementById("jobForm").addEventListener("submit", async function(eve
     };
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/jobs", {
+        const response = await fetch("http://3.106.120.107:5000/jobs", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -87,7 +87,7 @@ document.getElementById("jobForm").addEventListener("submit", async function(eve
 
 async function viewCompanyJobs() {
 try {
-const response = await fetch("http://127.0.0.1:5000/jobs");
+const response = await fetch("http://3.106.120.107:5000/jobs");
 const jobs = await response.json();
 
 
@@ -127,7 +127,7 @@ const jobs = await response.json();
 
 async function viewCompanyApplications() {
     try {
-        const applicationsResponse = await fetch("http://127.0.0.1:5000/applications");
+        const applicationsResponse = await fetch("http://3.106.120.107:5000/applications");
         const applications = await applicationsResponse.json();
 
         if (applications.length === 0) {
@@ -139,7 +139,7 @@ async function viewCompanyApplications() {
             return;
         }
 
-        const jobsResponse = await fetch("http://127.0.0.1:5000/jobs");
+        const jobsResponse = await fetch("http://3.106.120.107:5000/jobs");
         const jobs = await jobsResponse.json();
 
         const companyJobIds = jobs
@@ -205,7 +205,7 @@ async function viewCompanyApplications() {
 async function updateApplicationStatus(applicationId, newStatus) {
     try {
         const response = await fetch(
-            "http://127.0.0.1:5000/applications/" + applicationId,
+            "http://3.106.120.107:5000/applications/" + applicationId,
             {
                 method: "PUT",
                 headers: {
@@ -234,7 +234,7 @@ async function updateApplicationStatus(applicationId, newStatus) {
 
 async function viewCompanyInterviews() {
 try {
-const response = await fetch("http://127.0.0.1:5000/interviews");
+const response = await fetch("http://3.106.120.107:5000/interviews");
 const interviews = await response.json();
 
 
@@ -268,3 +268,4 @@ const interviews = await response.json();
 }
 
 }
+

@@ -7,7 +7,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     const message = document.getElementById("message");
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/login", {
+        const response = await fetch("http://3.106.120.107:5000/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -31,3 +31,4 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         message.innerHTML = "Unable to connect to server.";
     }
 });
+

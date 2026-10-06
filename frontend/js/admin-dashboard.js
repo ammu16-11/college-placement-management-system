@@ -1,7 +1,7 @@
 
 async function viewStudents() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/students");
+        const response = await fetch("http://3.106.120.107:5000/students");
 
         const students = await response.json();
 
@@ -47,7 +47,7 @@ async function viewStudents() {
 
 async function viewCompanies() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/companies");
+        const response = await fetch("http://3.106.120.107:5000/companies");
         const companies = await response.json();
 
         let content = "<div class='admin-box'><h2>Companies</h2>";
@@ -77,7 +77,7 @@ async function viewCompanies() {
 
 async function viewJobs() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/jobs");
+        const response = await fetch("http://3.106.120.107:5000/jobs");
         const jobs = await response.json();
 
         let content = "<div class='admin-box'><h2>Jobs</h2>";
@@ -112,7 +112,7 @@ async function viewJobs() {
 
 async function viewApplications() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/applications");
+        const response = await fetch("http://3.106.120.107:5000/applications");
         const applications = await response.json();
 
         let content = "<div class='admin-box'><h2>Applications</h2>";
@@ -145,7 +145,7 @@ async function viewApplications() {
 
 async function viewInterviews() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/interviews");
+        const response = await fetch("http://3.106.120.107:5000/interviews");
         const interviews = await response.json();
 
         let content = "<div class='admin-box'><h2>Interviews</h2>";
@@ -178,7 +178,7 @@ async function viewInterviews() {
 
 async function viewPlacements() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/placements");
+        const response = await fetch("http://3.106.120.107:5000/placements");
         const placements = await response.json();
 
         let content = "<div class='admin-box'><h2>Placements</h2>";
@@ -208,3 +208,4 @@ async function viewPlacements() {
         alert("Unable to load placements.");
     }
 }
+

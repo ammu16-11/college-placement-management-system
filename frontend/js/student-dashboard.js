@@ -1,7 +1,7 @@
 
 async function viewProfile() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/students");
+        const response = await fetch("http://3.106.120.107:5000/students");
         const students = await response.json();
 
         const student = students.find(student => student.student_id === 1);
@@ -27,7 +27,7 @@ async function viewProfile() {
 
 async function viewJobs() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/jobs");
+        const response = await fetch("http://3.106.120.107:5000/jobs");
         const jobs = await response.json();
 
         if (jobs.length === 0) {
@@ -64,7 +64,7 @@ async function viewJobs() {
 
 async function applyForJob(jobId) {
     try {
-        const response = await fetch("http://127.0.0.1:5000/applications", {
+        const response = await fetch("http://3.106.120.107:5000/applications", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -90,7 +90,7 @@ async function applyForJob(jobId) {
 
 async function viewApplications() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/applications");
+        const response = await fetch("http://3.106.120.107:5000/applications");
         const applications = await response.json();
 
         const studentApplications = applications.filter(
@@ -125,7 +125,7 @@ async function viewApplications() {
 }
 async function viewInterviews() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/interviews");
+        const response = await fetch("http://3.106.120.107:5000/interviews");
         const interviews = await response.json();
 
         const studentInterviews = interviews;
@@ -161,7 +161,7 @@ async function viewInterviews() {
 
 async function viewPlacement() {
     try {
-        const response = await fetch("http://127.0.0.1:5000/placements");
+        const response = await fetch("http://3.106.120.107:5000/placements");
         const placements = await response.json();
 
         const studentPlacements = placements.filter(
@@ -196,3 +196,4 @@ async function viewPlacement() {
         alert("Unable to load placement details.");
     }
 }
+
