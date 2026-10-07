@@ -16,6 +16,8 @@ phases:
       - echo Building Docker image...
       - docker build -t college-placement-backend ./backend
       - docker tag college-placement-backend:latest 179923445087.dkr.ecr.ap-southeast-2.amazonaws.com/college-placement-backend:latest
+      - echo Uploading frontend to S3...
+      - aws s3 sync frontend s3://college-placement-frontend-179923445087 --delete
 
   post_build:
     commands:
