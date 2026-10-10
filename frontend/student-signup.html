@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        width: min(400px, calc(100% - 60px));
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #1e3a8a;
+    }
+
+    label {
+        display: block;
+        margin-top: 14px;
+    }
+
+    input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 11px;
+        margin-top: 6px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 22px;
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #message {
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+
+    .links {
+        text-align: center;
+        margin-top: 18px;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <h2>Student Sign Up</h2>
+
+```
+    <form id="signupForm">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" maxlength="100" required>
+
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" maxlength="150" required>
+
+        <label for="password">Password *</label>
+        <input type="password" id="password" minlength="8" required>
+
+        <label for="confirm_password">Confirm Password *</label>
+        <input type="password" id="confirm_password" minlength="8" required>
+
+        <label for="register_number">Register Number *</label>
+        <input type="text" id="register_number" maxlength="50" required>
+
+        <label for="department">Department *</label>
+        <input type="text" id="department" maxlength="100" required>
+
+        <label for="cgpa">CGPA (0–10) *</label>
+        <input type="number" id="cgpa" min="0" max="10" step="0.01" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" maxlength="20">
+
+        <button type="submit">Create Student Account</button>
+    </form>
+
+    <p id="message" role="status"></p>
+
+    <div class="links">
+        <p>Already registered?</p>
+        <a href="student-login.html">Sign In</a>
+        <p><a href="index.html">Back to Home</a></p>
+    </div>
+</div>
+
+<script>
+    const API_URL = "http://3.106.120.107:5000";
+
+    document.getElementById("signupForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const message = document.getElementById("message");
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm_password").value;
+
+        if (password !== confirmPassword) {
+            message.textContent = "Passwords do not match.";
+            return;
+        }
+
+        message.textContent = "Creating account...";
+
+        try {
+            const response = await fetch(`${API_URL}/register/student`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: document.getElementById("name").value.trim(),
+                    email: document.getElementById("email").value.trim(),
+                    password: password,
+                    register_number: document.getElementById("register_number").value.trim(),
+                    department: document.getElementById("department").value.trim(),
+                    cgpa: Number(document.getElementById("cgpa").value),
+                    phone: document.getElementById("phone").value.trim()
+                })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || result.status !== "success") {
+                throw new Error(result.message || "Registration failed.");
+            }
+
+            message.textContent = "Account created successfully! Redirecting to sign in...";
+
+            document.getElementById("signupForm").reset();
+
+            setTimeout(() => {
+                window.location.href = "student-login.html";
+            }, 1500);
+        } catch (error) {
+            message.textContent = error.message || "Unable to connect to the server.";
+        }
+    });
+</script>
+```
+
+</body>
+</html>

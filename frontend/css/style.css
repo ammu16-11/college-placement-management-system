@@ -1150,3 +1150,24 @@ main h2 {
     font-weight: 500;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+.signup-links {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.signup-links p {
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.signup-links a {
+    color: #1e3a8a;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.signup-links a:hover {
+    text-decoration: underline;
+}

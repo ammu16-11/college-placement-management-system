@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_mysqldb import MySQL
 from dotenv import load_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
 load_dotenv()
@@ -594,47 +595,272 @@ def add_placement():
 def home():
     return "College Placement Management System is running!"
 
-
 @app.route("/login", methods=["POST"])
 def login():
+    data = request.get_json(silent=True) or {}
+
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+
+    if not email or not password:
+        return jsonify({
+            "status": "error",
+            "message": "Email and password are required"
+        }), 400
+
+    cursor = None
+
     try:
-        data = request.get_json()
-
-        email = data["email"]
-        password = data["password"]
-
         cursor = mysql.connection.cursor()
 
         cursor.execute("""
-            SELECT user_id, name, email, role
+            SELECT user_id, name, email, role, password
             FROM users
-            WHERE email = %s AND password = %s
-        """, (email, password))
+            WHERE email = %s
+        """, (email,))
 
         user = cursor.fetchone()
-        cursor.close()
 
-        if user:
+        if not user:
             return jsonify({
-                "status": "success",
-                "message": "Login successful",
-                "user_id": user[0],
-                "name": user[1],
-                "email": user[2],
-                "role": user[3]
-            })
+                "status": "error",
+                "message": "Invalid email or password"
+            }), 401
+
+        stored_password = user[4]
+
+        if stored_password.startswith(("scrypt:", "pbkdf2:")):
+            password_valid = check_password_hash(
+                stored_password, password
+            )
+        else:
+            password_valid = stored_password == password
+
+            if password_valid:
+                hashed_password = generate_password_hash(password)
+
+                cursor.execute("""
+                    UPDATE users
+                    SET password = %s
+                    WHERE user_id = %s
+                """, (hashed_password, user[0]))
+
+                mysql.connection.commit()
+
+        if not password_valid:
+            return jsonify({
+                "status": "error",
+                "message": "Invalid email or password"
+            }), 401
+
+        return jsonify({
+            "status": "success",
+            "message": "Login successful",
+            "user_id": user[0],
+            "name": user[1],
+            "email": user[2],
+            "role": user[3]
+        })
+
+    except Exception:
+        mysql.connection.rollback()
 
         return jsonify({
             "status": "error",
-            "message": "Invalid email or password"
-        }), 401
-
-    except Exception as e:
-        return jsonify({
-            "status": "error",
-            "message": str(e)
+            "message": "Unable to process login"
         }), 500
 
+    finally:
+        if cursor:
+            cursor.close()
+
+
+@app.route("/register/student", methods=["POST"])
+def register_student():
+    data = request.get_json(silent=True) or {}
+
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+    register_number = data.get("register_number", "").strip()
+    department = data.get("department", "").strip()
+    phone = data.get("phone", "").strip()
+    cgpa = data.get("cgpa")
+
+    if not all([name, email, password, register_number, department]):
+        return jsonify({
+            "status": "error",
+            "message": "Please fill in all required fields"
+        }), 400
+
+    if len(password) < 8:
+        return jsonify({
+            "status": "error",
+            "message": "Password must contain at least 8 characters"
+        }), 400
+
+    try:
+        cgpa = float(cgpa)
+
+        if not 0 <= cgpa <= 10:
+            raise ValueError
+
+    except (TypeError, ValueError):
+        return jsonify({
+            "status": "error",
+            "message": "CGPA must be between 0 and 10"
+        }), 400
+
+    cursor = None
+
+    try:
+        cursor = mysql.connection.cursor()
+
+        cursor.execute(
+            "SELECT user_id FROM users WHERE email = %s",
+            (email,)
+        )
+
+        if cursor.fetchone():
+            return jsonify({
+                "status": "error",
+                "message": "Email already registered"
+            }), 409
+
+        cursor.execute(
+            "SELECT student_id FROM students WHERE register_number = %s",
+            (register_number,)
+        )
+
+        if cursor.fetchone():
+            return jsonify({
+                "status": "error",
+                "message": "Register number already exists"
+            }), 409
+
+        hashed_password = generate_password_hash(password)
+
+        cursor.execute("""
+            INSERT INTO users (name, email, password, role)
+            VALUES (%s, %s, %s, 'STUDENT')
+        """, (name, email, hashed_password))
+
+        user_id = cursor.lastrowid
+
+        cursor.execute("""
+            INSERT INTO students
+            (user_id, register_number, department, cgpa, phone)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (
+            user_id,
+            register_number,
+            department,
+            cgpa,
+            phone or None
+        ))
+
+        mysql.connection.commit()
+
+        return jsonify({
+            "status": "success",
+            "message": "Student account created successfully",
+            "user_id": user_id
+        }), 201
+
+    except Exception:
+        if cursor:
+            mysql.connection.rollback()
+
+        return jsonify({
+            "status": "error",
+            "message": "Unable to create student account"
+        }), 500
+
+    finally:
+        if cursor:
+            cursor.close()
+
+@app.route("/register/company", methods=["POST"])
+def register_company():
+    data = request.get_json(silent=True) or {}
+
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip().lower()
+    password = data.get("password", "")
+    company_name = data.get("company_name", "").strip()
+    industry = data.get("industry", "").strip()
+    website = data.get("website", "").strip()
+    phone = data.get("phone", "").strip()
+
+    if not all([name, email, password, company_name]):
+        return jsonify({
+            "status": "error",
+            "message": "Name, email, password, and company name are required"
+        }), 400
+
+    if len(password) < 8:
+        return jsonify({
+            "status": "error",
+            "message": "Password must contain at least 8 characters"
+        }), 400
+
+    cursor = None
+
+    try:
+        cursor = mysql.connection.cursor()
+
+        cursor.execute(
+            "SELECT user_id FROM users WHERE email = %s",
+            (email,)
+        )
+
+        if cursor.fetchone():
+            return jsonify({
+                "status": "error",
+                "message": "Email already registered"
+            }), 409
+
+        hashed_password = generate_password_hash(password)
+
+        cursor.execute("""
+            INSERT INTO users (name, email, password, role)
+            VALUES (%s, %s, %s, 'COMPANY')
+        """, (name, email, hashed_password))
+
+        user_id = cursor.lastrowid
+
+        cursor.execute("""
+            INSERT INTO companies
+            (user_id, company_name, industry, website, phone)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (
+            user_id,
+            company_name,
+            industry or None,
+            website or None,
+            phone or None
+        ))
+
+        mysql.connection.commit()
+
+        return jsonify({
+            "status": "success",
+            "message": "Company account created successfully",
+            "user_id": user_id
+        }), 201
+
+    except Exception:
+        if cursor:
+            mysql.connection.rollback()
+
+        return jsonify({
+            "status": "error",
+            "message": "Unable to create company account"
+        }), 500
+
+    finally:
+        if cursor:
+            cursor.close()
 
 @app.route("/db-test")
 def db_test():

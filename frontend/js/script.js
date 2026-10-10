@@ -5,7 +5,7 @@ function selectRole(role) {
     }
 
     else if (role === "company") {
-        window.location.href = "company-dashboard.html";
+        window.location.href = "company-login.html";
     }
 
     else if (role === "admin") {
@@ -13,3 +13,4 @@ function selectRole(role) {
     }
 
 }
+
