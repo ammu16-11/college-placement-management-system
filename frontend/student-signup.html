@@ -66,14 +66,14 @@
         margin-top: 18px;
     }
 </style>
-```
+
 
 </head>
 <body>
     <div class="container">
         <h2>Student Sign Up</h2>
 
-```
+
     <form id="signupForm">
         <label for="name">Full Name *</label>
         <input type="text" id="name" maxlength="100" required>
@@ -112,7 +112,8 @@
 </div>
 
 <script>
-    const API_URL = "http://3.106.120.107:5000";
+    const API_URL = "http://127.0.0.1:5000";
+   
 
     document.getElementById("signupForm").addEventListener("submit", async function(event) {
         event.preventDefault();
@@ -161,7 +162,7 @@
         }
     });
 </script>
-```
+
 
 </body>
 </html>

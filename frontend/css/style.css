@@ -1171,3 +1171,319 @@ main h2 {
 .signup-links a:hover {
     text-decoration: underline;
 }
+
+
+
+body.dashboard-page {
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #e8f0ff, #f5f7fb);
+    color: #1e293b;
+}
+
+body.dashboard-page header {
+    background: linear-gradient(135deg, #123b70, #2563a6);
+    color: #ffffff;
+    text-align: center;
+    padding: 35px 20px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+body.dashboard-page header h1 {
+    margin: 0 0 10px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+body.dashboard-page header p {
+    margin: 0;
+    font-size: 15px;
+    color: #dbeafe;
+}
+
+/* Shared dashboard pages: preserve normal vertical document flow */
+body.dashboard-page main {
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+/* Officer login card only */
+body.dashboard-page:has(#officerLoginForm) main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 55px 20px;
+}
+
+body.dashboard-page:has(#officerLoginForm) .admin-box {
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    padding: 35px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+}
+
+body.dashboard-page .admin-box h2 {
+    margin: 0 0 28px;
+    color: #123b70;
+    text-align: center;
+    font-size: 25px;
+}
+
+#officerLoginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#officerLoginForm label {
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#officerLoginForm input {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 13px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#officerLoginForm input:focus {
+    border-color: #2563a6;
+    box-shadow: 0 0 0 3px rgba(37, 99, 166, 0.15);
+    background: #ffffff;
+}
+
+#officerLoginForm button {
+    margin-top: 5px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #174a82;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#officerLoginForm button:hover {
+    background: #2563a6;
+}
+
+#officerLoginForm button:active {
+    transform: scale(0.98);
+}
+
+#officerLoginForm #message {
+    min-height: 20px;
+    margin: 14px 0 0;
+    color: #b91c1c;
+    font-size: 14px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+body.dashboard-page .admin-box > p {
+    margin: 22px 0 0;
+    text-align: center;
+}
+
+body.dashboard-page .admin-box a {
+    color: #174a82;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+body.dashboard-page .admin-box a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    body.dashboard-page header {
+        padding: 28px 15px;
+    }
+
+    body.dashboard-page header h1 {
+        font-size: 24px;
+    }
+
+    body.dashboard-page main {
+        padding: 30px 15px;
+    }
+
+    body.dashboard-page .admin-box {
+        padding: 25px 20px;
+    }
+}
+
+
+/* Dashboard content panel */
+#adminContent,
+#dashboardContent {
+display: block;
+width: 100%;
+box-sizing: border-box;
+margin: 25px 0;
+padding: 25px;
+background: #ffffff;
+border: 1px solid #dbe4f0;
+border-radius: 14px;
+box-shadow: 0 5px 18px rgba(15, 23, 42, 0.08);
+text-align: left;
+overflow-x: auto;
+}
+
+/* Content headings */
+#adminContent h2,
+#adminContent h3,
+#dashboardContent h2,
+#dashboardContent h3 {
+color: #1e3a8a;
+margin-top: 0;
+margin-bottom: 18px;
+}
+
+/* Tables inside dashboard panels */
+#adminContent table,
+#dashboardContent table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 15px;
+background: #ffffff;
+}
+
+/* Table headings and cells */
+#adminContent th,
+#adminContent td,
+#dashboardContent th,
+#dashboardContent td {
+padding: 12px 14px;
+border: 1px solid #e2e8f0;
+text-align: left;
+vertical-align: top;
+}
+
+/* Table heading row */
+#adminContent th,
+#dashboardContent th {
+background: #1e3a8a;
+color: #ffffff;
+font-weight: 600;
+}
+
+/* Alternating table rows */
+#adminContent tbody tr:nth-child(even),
+#dashboardContent tbody tr:nth-child(even) {
+background: #f8fafc;
+}
+
+/* Loading and empty-state messages */
+#adminContent p,
+#dashboardContent p {
+color: #475569;
+line-height: 1.6;
+overflow-wrap: anywhere;
+}
+
+/* Responsive tables */
+@media (max-width: 600px) {
+#adminContent,
+#dashboardContent {
+padding: 15px;
+}
+
+
+#adminContent table,
+#dashboardContent table {
+    min-width: 600px;
+}
+
+}
+
+/* Resume upload section */
+#resumeUploadForm {
+margin: 20px 0;
+padding: 20px;
+background: #f8fafc;
+border: 1px solid #dbe4f0;
+border-radius: 12px;
+}
+
+/* Resume upload label */
+#resumeUploadForm label {
+display: block;
+margin-bottom: 10px;
+color: #1e3a8a;
+font-weight: 600;
+}
+
+/* Choose file control */
+#resumeFile {
+display: block;
+width: 100%;
+max-width: 100%;
+margin-bottom: 15px;
+padding: 10px;
+box-sizing: border-box;
+background: #ffffff;
+border: 1px solid #cbd5e1;
+border-radius: 8px;
+color: #334155;
+}
+
+/* Upload and download buttons */
+#resumeUploadForm button,
+#dashboardContent button[onclick="downloadResume()"] {
+display: inline-block;
+margin: 5px 8px 5px 0;
+padding: 11px 20px;
+background: #1e3a8a;
+color: #ffffff;
+border: none;
+border-radius: 8px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+#resumeUploadForm button:hover,
+#dashboardContent button[onclick="downloadResume()"]:hover {
+background: #2563eb;
+transform: translateY(-1px);
+}
+
+/* Keyboard focus */
+#resumeUploadForm button:focus-visible,
+#dashboardContent button[onclick="downloadResume()"]:focus-visible,
+#resumeFile:focus-visible {
+outline: 3px solid #93c5fd;
+outline-offset: 3px;
+}
+
+/* Upload status message */
+#resumeMessage {
+margin-top: 12px;
+color: #475569;
+font-size: 14px;
+line-height: 1.5;
+}

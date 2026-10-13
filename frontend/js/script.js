@@ -1,16 +1,10 @@
-function selectRole(role) {
 
+function selectRole(role) {
     if (role === "student") {
         window.location.href = "student-login.html";
-    }
-
-    else if (role === "company") {
+    } else if (role === "company") {
         window.location.href = "company-login.html";
+    } else if (role === "admin") {
+        window.location.href = "officer-login.html";
     }
-
-    else if (role === "admin") {
-        window.location.href = "admin-dashboard.html";
-    }
-
 }
-

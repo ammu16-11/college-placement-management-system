@@ -5,3 +5,6 @@ __pycache__/
 .vscode/
 .idea/
 college_placement_backup.sql
+backend/.env
+backend/__pycache__/
+backend/uploads/
