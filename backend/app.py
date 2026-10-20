@@ -969,6 +969,7 @@ def create_application():
 
 
 
+
 @app.route("/applications/<int:application_id>", methods=["PUT"])
 def update_application_status(application_id):
     authenticated_user = get_authenticated_user()
@@ -979,38 +980,50 @@ def update_application_status(application_id):
             "message": "Authentication required"
         }), 401
 
-    if authenticated_user["role"] != "OFFICER":
+    role = authenticated_user["role"]
+    user_id = authenticated_user["user_id"]
+
+    if role not in ["OFFICER", "COMPANY"]:
         return jsonify({
             "status": "error",
-            "message": "Officer access required"
+            "message": "Access denied"
         }), 403
+
+    data = request.get_json(silent=True) or {}
+    status = data.get("status")
+    allowed_statuses = {"APPLIED", "SHORTLISTED", "REJECTED"}
+
+    if status not in allowed_statuses:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid application status."
+        }), 400
 
     cursor = None
 
     try:
-        data = request.get_json(silent=True) or {}
-        status = data.get("status")
-
-        allowed_statuses = {"APPLIED", "SHORTLISTED", "REJECTED"}
-
-        if status not in allowed_statuses:
-            return jsonify({
-                "status": "error",
-                "message": "Invalid application status."
-            }), 400
-
         cursor = mysql.connection.cursor()
 
-        cursor.execute("""
-            SELECT application_id
-            FROM applications
-            WHERE application_id = %s
-        """, (application_id,))
+        if role == "COMPANY":
+            cursor.execute("""
+                SELECT a.application_id
+                FROM applications a
+                JOIN jobs j ON a.job_id = j.job_id
+                JOIN companies c ON j.company_id = c.company_id
+                WHERE a.application_id = %s
+                  AND c.user_id = %s
+            """, (application_id, user_id))
+        else:
+            cursor.execute("""
+                SELECT application_id
+                FROM applications
+                WHERE application_id = %s
+            """, (application_id,))
 
         if not cursor.fetchone():
             return jsonify({
                 "status": "error",
-                "message": "Application not found."
+                "message": "Application not found or access denied."
             }), 404
 
         cursor.execute("""
@@ -1039,8 +1052,6 @@ def update_application_status(application_id):
     finally:
         if cursor:
             cursor.close()
-
-
 
 @app.route("/interviews", methods=["POST"])
 def add_interview():
