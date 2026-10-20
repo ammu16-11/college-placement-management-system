@@ -779,8 +779,6 @@ def add_student():
     }), 410
 
 
-
-
 @app.route("/applications", methods=["GET"])
 def get_applications():
     authenticated_user = get_authenticated_user()
@@ -792,14 +790,14 @@ def get_applications():
         }), 401
 
     role = authenticated_user["role"]
+    user_id = authenticated_user["user_id"]
+    cursor = None
 
-    if role not in ["STUDENT", "OFFICER"]:
+    if role not in ["STUDENT", "OFFICER", "COMPANY"]:
         return jsonify({
             "status": "error",
             "message": "Access denied"
         }), 403
-
-    cursor = None
 
     try:
         cursor = mysql.connection.cursor()
@@ -811,7 +809,18 @@ def get_applications():
                 FROM applications a
                 JOIN students s ON a.student_id = s.student_id
                 WHERE s.user_id = %s
-            """, (authenticated_user["user_id"],))
+            """, (user_id,))
+
+        elif role == "COMPANY":
+            cursor.execute("""
+                SELECT a.application_id, a.student_id, a.job_id,
+                       a.status, a.applied_at
+                FROM applications a
+                JOIN jobs j ON a.job_id = j.job_id
+                JOIN companies c ON j.company_id = c.company_id
+                WHERE c.user_id = %s
+            """, (user_id,))
+
         else:
             cursor.execute("""
                 SELECT application_id, student_id, job_id,
@@ -820,6 +829,7 @@ def get_applications():
             """)
 
         rows = cursor.fetchall()
+
         applications = []
 
         for row in rows:
@@ -1136,8 +1146,6 @@ def add_interview():
             cursor.close()
 
 
-
-
 @app.route("/interviews", methods=["GET"])
 def get_interviews():
     authenticated_user = get_authenticated_user()
@@ -1149,8 +1157,9 @@ def get_interviews():
         }), 401
 
     role = authenticated_user["role"]
+    user_id = authenticated_user["user_id"]
 
-    if role not in ["STUDENT", "OFFICER"]:
+    if role not in ["STUDENT", "OFFICER", "COMPANY"]:
         return jsonify({
             "status": "error",
             "message": "Access denied"
@@ -1172,7 +1181,23 @@ def get_interviews():
                 JOIN students s
                     ON a.student_id = s.student_id
                 WHERE s.user_id = %s
-            """, (authenticated_user["user_id"],))
+            """, (user_id,))
+
+        elif role == "COMPANY":
+            cursor.execute("""
+                SELECT i.interview_id, i.application_id,
+                       i.interview_date, i.interview_time,
+                       i.mode, i.result
+                FROM interviews i
+                JOIN applications a
+                    ON i.application_id = a.application_id
+                JOIN jobs j
+                    ON a.job_id = j.job_id
+                JOIN companies c
+                    ON j.company_id = c.company_id
+                WHERE c.user_id = %s
+            """, (user_id,))
+
         else:
             cursor.execute("""
                 SELECT interview_id, application_id,
@@ -1206,7 +1231,6 @@ def get_interviews():
     finally:
         if cursor:
             cursor.close()
-
 
 
 
