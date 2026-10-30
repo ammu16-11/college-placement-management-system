@@ -6,6 +6,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import uuid
 import jwt
+import json
+import boto3
 from datetime import datetime, timedelta, timezone
 from flask import send_from_directory
 
@@ -21,6 +23,30 @@ app.config["MYSQL_PASSWORD"] = os.getenv("DB_PASSWORD")
 app.config["MYSQL_DB"] = os.getenv("DB_NAME")
 
 mysql = MySQL(app)
+
+sns = boto3.client("sns", region_name="ap-southeast-2")
+
+SNS_TOPIC_ARN = os.getenv(
+    "SNS_TOPIC_ARN",
+    "arn:aws:sns:ap-southeast-2:179923445087:cpms-notification-events"
+)
+
+def publish_notification(to_email, subject, body):
+    try:
+        sns.publish(
+            TopicArn=SNS_TOPIC_ARN,
+            Message=json.dumps({
+                "to_email": to_email,
+                "subject": subject,
+                "body": body
+            })
+        )
+        app.logger.info("SNS notification published successfully")
+        return True
+
+    except Exception:
+        app.logger.exception("SNS notification publishing failed")
+        return False
 
 UPLOAD_FOLDER = os.path.join(app.root_path, "uploads", "resumes")
 ALLOWED_RESUME_EXTENSIONS = {"pdf"}
@@ -969,7 +995,6 @@ def create_application():
 
 
 
-
 @app.route("/applications/<int:application_id>", methods=["PUT"])
 def update_application_status(application_id):
     authenticated_user = get_authenticated_user()
@@ -1027,12 +1052,50 @@ def update_application_status(application_id):
             }), 404
 
         cursor.execute("""
+            SELECT a.status, u.email, u.name
+            FROM applications a
+            JOIN students s ON a.student_id = s.student_id
+            JOIN users u ON s.user_id = u.user_id
+            WHERE a.application_id = %s
+        """, (application_id,))
+
+        student = cursor.fetchone()
+
+        if not student:
+            return jsonify({
+                "status": "error",
+                "message": "Student details not found."
+            }), 404
+
+        old_status = student[0]
+        student_email = student[1]
+        student_name = student[2]
+
+        cursor.execute("""
             UPDATE applications
             SET status = %s
             WHERE application_id = %s
         """, (status, application_id))
 
         mysql.connection.commit()
+
+        if old_status != status and status in ["SHORTLISTED", "REJECTED"]:
+            subject = "Application Status Updated"
+
+            if status == "SHORTLISTED":
+                body = (
+                    f"Hello {student_name},\n\n"
+                    "Congratulations! Your job application has been shortlisted.\n"
+                    f"Application ID: {application_id}\n"
+                )
+            else:
+                body = (
+                    f"Hello {student_name},\n\n"
+                    "Your job application status has been updated to Rejected.\n"
+                    f"Application ID: {application_id}\n"
+                )
+
+            publish_notification(student_email, subject, body)
 
         return jsonify({
             "status": "success",
@@ -1052,6 +1115,7 @@ def update_application_status(application_id):
     finally:
         if cursor:
             cursor.close()
+
 
 @app.route("/interviews", methods=["POST"])
 def add_interview():
@@ -1113,16 +1177,23 @@ def add_interview():
         cursor = mysql.connection.cursor()
 
         cursor.execute("""
-            SELECT application_id
-            FROM applications
-            WHERE application_id = %s
+            SELECT u.email, u.name
+            FROM applications a
+            JOIN students s ON a.student_id = s.student_id
+            JOIN users u ON s.user_id = u.user_id
+            WHERE a.application_id = %s
         """, (application_id,))
 
-        if not cursor.fetchone():
+        student = cursor.fetchone()
+
+        if not student:
             return jsonify({
                 "status": "error",
-                "message": "Application not found"
+                "message": "Application or student details not found"
             }), 404
+
+        student_email = student[0]
+        student_name = student[1]
 
         cursor.execute("""
             INSERT INTO interviews
@@ -1137,6 +1208,21 @@ def add_interview():
 
         interview_id = cursor.lastrowid
         mysql.connection.commit()
+
+        subject = "Interview Scheduled"
+
+        body = (
+            f"Hello {student_name},\n\n"
+            "Your interview has been scheduled.\n"
+            f"Application ID: {application_id}\n"
+            f"Interview Date: {interview_date}\n"
+            f"Interview Time: {interview_time}\n"
+            f"Mode: {mode or 'Not specified'}\n\n"
+            "Please log in to the College Placement Management System "
+            "for further details."
+        )
+
+        publish_notification(student_email, subject, body)
 
         return jsonify({
             "status": "success",
@@ -1243,8 +1329,6 @@ def get_interviews():
         if cursor:
             cursor.close()
 
-
-
 @app.route("/interviews/<int:interview_id>", methods=["PUT"])
 def update_interview_result(interview_id):
     authenticated_user = get_authenticated_user()
@@ -1278,16 +1362,26 @@ def update_interview_result(interview_id):
         cursor = mysql.connection.cursor()
 
         cursor.execute("""
-            SELECT interview_id
-            FROM interviews
-            WHERE interview_id = %s
+            SELECT i.result, a.application_id, u.email, u.name
+            FROM interviews i
+            JOIN applications a ON i.application_id = a.application_id
+            JOIN students s ON a.student_id = s.student_id
+            JOIN users u ON s.user_id = u.user_id
+            WHERE i.interview_id = %s
         """, (interview_id,))
 
-        if not cursor.fetchone():
+        interview = cursor.fetchone()
+
+        if not interview:
             return jsonify({
                 "status": "error",
                 "message": "Interview not found"
             }), 404
+
+        old_result = interview[0]
+        application_id = interview[1]
+        student_email = interview[2]
+        student_name = interview[3]
 
         cursor.execute("""
             UPDATE interviews
@@ -1296,6 +1390,20 @@ def update_interview_result(interview_id):
         """, (result, interview_id))
 
         mysql.connection.commit()
+
+        if old_result != result and result in {"PASSED", "FAILED"}:
+            subject = "Interview Result Updated"
+
+            body = (
+                f"Hello {student_name},\n\n"
+                f"Your interview result has been updated to {result}.\n"
+                f"Application ID: {application_id}\n"
+                f"Interview ID: {interview_id}\n\n"
+                "Please log in to the College Placement Management System "
+                "for further details."
+            )
+
+            publish_notification(student_email, subject, body)
 
         return jsonify({
             "status": "success",
@@ -1313,7 +1421,6 @@ def update_interview_result(interview_id):
     finally:
         if cursor:
             cursor.close()
-
 
 
 
